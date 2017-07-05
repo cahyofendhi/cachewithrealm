@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion project.targetApiLevel.toInteger()
+    buildToolsVersion project.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "com.cachewithrealm"
+        minSdkVersion project.minApiLevel
+        targetSdkVersion project.targetApiLevel
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$project.buildToolsVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+
+    compile 'io.reactivex.rxjava2:rxjava:2.0.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile "com.squareup.retrofit2:retrofit:$project.retrofitPluginVersion"
+    compile "com.squareup.retrofit2:converter-gson:$project.retrofitPluginVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$project.retrofitPluginVersion"
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    apt "com.google.dagger:dagger-compiler:$project.daggerPluginVersion"
+    compile "com.google.dagger:dagger:$project.daggerPluginVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    compile "com.jakewharton:butterknife:$project.butterknifePluginVersion"
+    apt "com.jakewharton:butterknife-compiler:$project.butterknifePluginVersion"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CacheWithRealm</string>
+    <string name="base_url">http://api.openweathermap.org/data/2.5/</string>
+    <string name="api_key">30e421ecb4e3f40443b0950ac59160e3</string>
+</resources>
